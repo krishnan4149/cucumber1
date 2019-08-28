@@ -23,7 +23,7 @@ public class First {
 
 	@Given("user click and customer like")
 	public void user_click_and_customer_like() {
-		driver.findElement(By.xpath("(//a[text()='Add Customer'])[1]")).click();
+		driver.findElement(By.xpath("//a[text()='Add Tariff Plan']")).click();
 		
 }
 
@@ -65,7 +65,7 @@ public class First {
 	
 	//One Dimensional Map
 	
-	@When("user provide vaid details")
+	/*@When("user provide vaid details")
 	public void user_provide_vaid_details(io.cucumber.datatable.DataTable dataTable) {
 			Map<String, String>onedieMap = dataTable.asMap(String.class,String.class);
 			driver.findElement(By.xpath("//label[text()='Done']")).click();
@@ -76,12 +76,51 @@ public class First {
 		    driver.findElement(By.id("telephoneno")).sendKeys(onedieMap.get("phno"));
 		    driver.findElement(By.xpath("//input[@type='submit']")).click();
 		}
+	*/
+	//Two Dimensional List
 	
+	/*   @When("user provide vaid details")
+	public void user_provide_vaid_details(io.cucumber.datatable.DataTable dataTable) {
+		List<List<String>>twodimen = dataTable.asLists(String.class);
+		System.out.println(twodimen);
+		driver.findElement(By.id("rental1")).sendKeys(twodimen.get(0).get(2));
+		driver.findElement(By.id("local_minutes")).sendKeys(twodimen.get(0).get(1));
+		driver.findElement(By.id("inter_minutes")).sendKeys(twodimen.get(0).get(3));
+		driver.findElement(By.id("sms_pack")).sendKeys(twodimen.get(0).get(2));
+		driver.findElement(By.id("minutes_charges")).sendKeys(twodimen.get(0).get(2));
+		driver.findElement(By.id("inter_charges")).sendKeys(twodimen.get(0).get(1));
+		driver.findElement(By.id("sms_charges")).sendKeys(twodimen.get(0).get(2));
+		driver.findElement(By.xpath("//input[@value='submit']")).click();
+	   
+	}*/
+	
+	//TwoDimensional Map
+	
+	
+	
+	
+	@When("user provide vaid details")
+	public void user_provide_vaid_details(io.cucumber.datatable.DataTable dataTable) {
+		List<Map<String, String>>twodieMap = dataTable.asMaps(String.class,String.class);
+		driver.findElement(By.id("rental1")).sendKeys(twodieMap.get(0).get("Monthly"));
+		driver.findElement(By.id("local_minutes")).sendKeys(twodieMap.get(0).get("Local"));
+		driver.findElement(By.id("inter_minutes")).sendKeys(twodieMap.get(0).get("International"));
+		driver.findElement(By.id("sms_pack")).sendKeys(twodieMap.get(0).get("SMS"));
+		driver.findElement(By.id("minutes_charges")).sendKeys(twodieMap.get(0).get("Local Per"));
+		driver.findElement(By.id("inter_charges")).sendKeys(twodieMap.get(0).get("International Per"));
+		driver.findElement(By.id("sms_charges")).sendKeys(twodieMap.get(0).get("SMS Per"));
+		driver.findElement(By.xpath("//input[@value='submit']")).click();
+		
+		
+		
+	   
+	}
 
 
-    @Then("to verife the customer id is displayed")
+	
+     @Then("to verife the customer id is displayed")
 	public void to_verife_the_customer_id_is_displayed() {
-	Assert.assertTrue(driver.findElement(By.xpath("(//td[@align='center'])[2]")).isDisplayed());
+	Assert.assertTrue(driver.findElement(By.xpath("//input[@value='submit']")).isDisplayed());
 	    
 	}
 
